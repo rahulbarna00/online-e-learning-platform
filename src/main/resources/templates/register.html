@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #f0f5f9, #cfe0e8); /* Subtle gradient background */
+            margin: 0;
+            padding: 0;
+            color: #333; /* Text color */
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            margin: 10px;
+            width: 400px;
+            max-width: 100%; /* Make the form container responsive */
+        }
+
+        h2 {
+            text-align: center;
+            color: #4a4a4a; /* Dark gray title color */
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #4a4a4a; /* Dark gray label color */
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-weight: bold;
+            background-color: #f9f9f9; /* Light gray input background color */
+            color: #555; /* Text color */
+        }
+
+        button[type="submit"] {
+            background-color: #6a8a82; /* Teal button background color */
+            color: #fff; /* White text color */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #4e6f68; /* Darker teal on hover */
+        }
+
+        .success-message {
+            background-color: #6a8a82; /* Teal success message background color */
+            color: #fff;
+            padding: 10px;
+            border-radius: 3px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .error-message {
+            color: #e74c3c; /* Red error message color */
+            margin-top: 5px;
+            display: block;
+        }
+
+        .login-link {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            color: #4a4a4a; /* Dark gray login link color */
+        }
+
+        .login-link a {
+            color: #4a4a4a; /* Dark gray login link color */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="form-container">
+
+        <div th:if="${param.success}" class="success-message">
+            <p>Registration Successful!</p>
+        </div>
+
+        <h2>Registration</h2>
+        <form
+                method="post"
+                role="form"
+                th:action="@{/register}"
+                th:object="${user}"
+        >
+            <div class="form-group">
+                <label for="fullname">Fullname</label>
+                <input th:field="*{fullname}" type="text" id="fullname" name="fullname" placeholder="Enter your fullname" required>
+            </div>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input th:field="*{username}" type="text" id="username" name="username" placeholder="Enter your username" required>
+                <span th:if="${userexist}" class="error-message">Username is Taken</span>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input th:field="*{password}" type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit">Register</button>
+        </form>
+        <div class="login-link">Already Registered? <a th:href="@{/login}">Login</a></div>
+    </div>
+</div>
+
+</body>
+</html>
