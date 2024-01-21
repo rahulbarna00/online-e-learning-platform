@@ -1,76 +1,157 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(to right, #f0f5f9, #cfe0e8); /* Subtle gradient background */
-            margin: 0;
-            padding: 0;
-            color: #333; /* Text color */
-        }
+        nav {
+    display: flex;
+    justify-content: space-between; /* Updated to space-between */
+    background-color: #444;
+    padding: 10px;
+}
 
-        .dashboard {
-            background: linear-gradient(45deg, #8e2de2, #4a00e0);
-            color: #fff;
-            padding: 40px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
 
-        .dashboard__title {
-            font-size: 28px;
-            margin-top: 0;
-        }
+nav a:hover {
+    background-color: #555;
+}
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
 
-        .dashboard__user {
-            margin-top: 20px;
-        }
+.header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        .dashboard__user-name {
-            font-size: 36px;
-            color: #c299d0;
-            margin: 0;
-        }
+.header__logo {
+    font-size: 24px;
+}
 
-        .logout-link {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            text-decoration: none;
-            color: #4a4a4a; /* Dark gray logout link color */
-            border: 2px solid #4a4a4a; /* Dark gray border */
-            padding: 10px 20px;
-            border-radius: 5px;
-            transition: background 0.3s, color 0.3s;
-        }
+.dashboard {
+    background-color: #3498db;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
 
-        .logout-link:hover {
-            background: #4a4a4a; /* Darker gray on hover */
-            color: #fff; /* White text color on hover */
-        }
+.dashboard__title {
+    margin: 0;
+    font-size: 24px;
+}
+
+.dashboard__user {
+    margin: 20px 0;
+}
+
+.dashboard__user-name {
+    margin: 10px 0;
+    font-size: 20px;
+}
+
+.logout-link {
+    font-size: 16px;
+}
+
+h1 {
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.enrolled-courses {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column; /* Change to column for vertical alignment */
+    align-items: center; /* Center the courses vertically */
+}
+
+.enrolled-course {
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    width: 50%;
+    display: flex; /* Use flexbox for image and details alignment */
+}
+
+.enrolled-course:hover {
+    transform: scale(1.02);
+}
+
+.course-image {
+    flex: 0 0 auto; /* Image on the left */
+    margin-right: 20px;
+}
+
+.course-image img {
+    width: 100px; /* Set a fixed width */
+    height: 100px; /* Set a fixed height */
+    border-radius: 10px;
+}
+
+.course-details {
+    flex: 1 1 auto; /* Course details on the right */
+    font-size: 18px;
+}
     </style>
 </head>
 
 <body>
-<div class="dashboard">
-    <h1 class="dashboard__title">Welcome to the Dashboard</h1>
-    <div class="dashboard__user">
-        <h2 th:text="${userdetail.fullname}" class="dashboard__user-name">User's Name</h2>
-        <h2 th:text="${userdetail.id}" class="dashboard__user-name">User's Name</h2>
-    </div>
-</div>
-<span sec:authorize="isAuthenticated" class="logout-link"><a th:href="@{/logout}">Logout</a></span>
 
-<button><a href="/course">All Courses</a></button>
+<nav>
+    <a href="/">E-Learning Platform</a>
+    <a href="/course">All Courses</a>
+    <a sec:authorize="isAuthenticated" class="logout-link"><a th:href="@{/logout}">Logout</a></a>
+</nav>
+
+<h1>Welcome <span th:text="${userdetail.fullname}" /></h1>
 
 <h1>Enrolled Courses</h1>
 
-<li th:each="course : ${enrolledCourses}">
-    <span th:text="${course.course.courseName}"></span> <span th:text="${course.course.durationHrs}"></span>
-</li>
+<ul class="enrolled-courses">
+    <li th:each="course : ${enrolledCourses}" class="enrolled-course">
+        <a th:href="${course.course.videoUrl}" target="_blank">
+            <div class="course-image">
+                <img th:src="${course.course.thumbnailUrl}" alt="Course Thumbnail" />
+            </div>
+        </a>
+        <div class="course-details">
+            <span th:text="${course.course.courseName}"></span>
+            <br>
+            <span>Category: </span><span th:text="${course.course.category}"></span>
+            <br>
+            <span>Level: </span><span th:text="${course.course.level}"></span>
+            <br>
+            <span>Duration: </span><span th:text="${course.course.durationHrs}"></span>
+            <br>
+            <span>Published On: </span><span th:text="${course.course.publishedOn}"></span>
+        </div>
 
+    </li>
+</ul>
 </body>
+
 </html>

@@ -16,7 +16,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            height: 80vh;
         }
 
         .form-container {
@@ -99,9 +99,33 @@
         .register-link a:hover {
             text-decoration: underline;
         }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            background-color: #333; /* Match the header background color */
+            padding: 15px; /* Match the header padding */
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #555;
+        }
+
     </style>
 </head>
 <body>
+<nav>
+    <a href="/">E-Learning Platform</a>
+    <a href="/dashboard">My Account</a>
+</nav>
 
 <div class="container">
     <div class="form-container">
