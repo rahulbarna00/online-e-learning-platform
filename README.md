@@ -41,6 +41,15 @@ The Spring Security configuration for this project is defined in the `SecurityCo
 - Explore available courses and enroll in the ones you are interested in.
 - Instructors can create and manage courses.
 
+You can find some screenshots below
 Happy learning! 🚀
 
-
+![1](https://github.com/rahulbarna00/online-e-learning-platform/assets/97344601/20e05a4f-76df-4f01-84cd-8602dbc0a20c)
+![2](https://github.com/rahulbarna00/online-e-learning-platform/assets/97344601/8a28ce16-3233-4723-a1f3-2106976e3367)
+![3](https://github.com/rahulbarna00/online-e-learning-platform/assets/97344601/2509b5a9-54f1-4068-8832-f05066382277)
+![4](https://github.com/rahulbarna00/online-e-learning-platform/assets/97344601/393d42f1-f507-42fc-8dfb-02c47614b71c)
+![5](https://github.com/rahulbarna00/online-e-learning-platform/assets/97344601/6a43bcd7-aed2-443f-89e5-9d3f454f700d)
+![6](https://github.com/rahulbarna00/online-e-learning-platform/assets/97344601/3a0fe90c-50dc-4591-8d0f-d32d2ce25c08)
+![7](https://github.com/rahulbarna00/online-e-learning-platform/assets/97344601/12e6b8f5-5611-45a8-a77d-957391cf5cec)
+![8](https://github.com/rahulbarna00/online-e-learning-platform/assets/97344601/fe069cb5-3d5f-473f-88b2-39d05e80e8ae)
+![9](https://github.com/rahulbarna00/online-e-learning-platform/assets/97344601/39d7cf39-1a75-4651-94d8-4b4eb80916dd)
