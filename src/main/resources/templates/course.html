@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Courses</title>
+</head>
+<body>
+<h1>All Courses</h1>
+<div th:if="${param.enrolled}" class="error-message">
+    <p>Already Enrolled try another course</p>
+</div>
+<form action="/course" method="POST" th:each="course: ${courses}">
+    <div style="margin-bottom: 20px;">
+        <a th:href="${course.videoUrl}" target="_blank">
+            <img th:src="${course.thumbnailUrl}" alt="Thumbnail" style="max-width: 30%;">
+        </a>
+        <p th:text="${course.courseName}"></p>
+    </div>
+
+    <!-- Add a hidden input field to carry the courseId -->
+    <input type="hidden" name="courseId" th:value="${course.courseId}">
+    <input type="hidden" name="userId" th:value="${userdetail.id}">
+    <button>Enroll</button>
+</form>
+</body>
+</html>

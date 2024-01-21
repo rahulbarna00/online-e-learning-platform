@@ -16,40 +16,44 @@ import com.example.server.service.user.CustomUserDetailsServices;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-	
-	@Autowired
-	CustomUserDetailsServices customUserDetailsServices;
-	
-	@Bean
-	public static PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
-	
-	@SuppressWarnings("removal")
-	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity http)throws Exception {
-		
-		http.csrf().disable().authorizeHttpRequests()
-		.requestMatchers("/register").permitAll()
-		.requestMatchers("/home").permitAll().and()
-		.formLogin()
-		.loginPage("/login")
-		.loginProcessingUrl("/login")
-		.defaultSuccessUrl("/home", true).permitAll()
-		.and()
-		.logout()
-		.invalidateHttpSession(true)
-	     .clearAuthentication(true)
-	     .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-	     .logoutSuccessUrl("/login?logout").permitAll();
-		
-		return http.build();
-		
-}
-	
-	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(customUserDetailsServices).passwordEncoder(passwordEncoder());
-	}
 
+	@Configuration
+	//@Order(1)
+	public static class ConfigurationAdapter1{
+		@Autowired
+		CustomUserDetailsServices customUserDetailsServices;
+
+		@Bean
+		public static PasswordEncoder passwordEncoder() {
+			return new BCryptPasswordEncoder();
+		}
+
+		@SuppressWarnings("removal")
+		@Bean
+		public SecurityFilterChain securityFilterChain(HttpSecurity http)throws Exception {
+
+			http.csrf().disable().authorizeHttpRequests()
+					.requestMatchers("/EnrollCourse").permitAll()
+					.requestMatchers("/").permitAll()
+					.requestMatchers("/course").permitAll()
+					.requestMatchers("/register").permitAll()
+					.requestMatchers("/dashboard").permitAll().and()
+					.formLogin()
+					.loginPage("/login")
+					.loginProcessingUrl("/login")
+					.defaultSuccessUrl("/dashboard", true).permitAll()
+					.and()
+					.logout()
+					.invalidateHttpSession(true)
+					.clearAuthentication(true)
+					.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+					.logoutSuccessUrl("/login?logout").permitAll();
+			return http.build();
+		}
+
+		@Autowired
+		public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+			auth.userDetailsService(customUserDetailsServices).passwordEncoder(passwordEncoder());
+		}
+	}
 }
